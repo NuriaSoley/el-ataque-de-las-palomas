@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El Ataque de las Palomas</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!--PANTALLA INICIO-->
+  <div id="splash-screen" class ="container">
+    <img src="./Images/Logo.png" alt="logo" width="500">  
+    <button id="start-btn">POOP!</button>
+    <div id="instructions">
+        <h4>INSTRUCTIONS</h4>
+        <ol>
+          <li>Press A to move to the left</li>
+          <li>Press D to move to the right</li>
+          <li>Press S to poop</li>
+          <li>(press W to jump)</li>
+          <li>Aim carefully!</li>
+        </ol>
+        <p>Show the world who is in charge by leaving your mark on everything! But be careful! Not everyone will let you do your job peacefully...</p>
+    </div>
+  </div>
+
+  <!--PANTALLA DE JUEGO-->
+  <div id="game-screen" class="container">
+    <!--Elementos de vidas y puntuación antes del game-box-->
+    <div id="game-box">
+    </div>
+  </div>
+
+  <!--PANTALLA FINAL-->
+  <div id="game-over-screen" class="container">
+    <img src="./Images/gameOverLogo.PNG" alt="game-over" width="400">
+  </div>
+
+<script src="./js/main.js"></script>
+<script src="./js/Paloma.js"></script>
+<script src="./js/Objetivo.js"></script>
+
+</body>
+</html>
