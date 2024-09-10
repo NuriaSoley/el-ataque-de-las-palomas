@@ -1,9 +1,9 @@
 class Paloma {
   constructor (){
     this.x = 70;
-    this.y = 150;
-    this.h = 60;
-    this.w = 70;
+    this.y = 225;
+    this.h = 50;
+    this.w = 45;
     this.movementSpeed = 20;
     
 

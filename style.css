@@ -1,6 +1,10 @@
 body {
   margin: 0;
-  background-color: lightgrey
+  
+}
+
+.splash-screen {
+  background-image: url("./Images/fonsinici.png")
 }
 
 #start-btn {
@@ -32,8 +36,8 @@ body {
 
 #game-box {
   background-color: grey;
-  width:800px;
-  height:600px;
+  width: 1000px;
+  height:800px;
 
   position: relative; /* permite posicionar los elementos de forma absoluta dentro del game-box */
   overflow: hidden; /* previene que los elementos salgan visualmente del game-box */

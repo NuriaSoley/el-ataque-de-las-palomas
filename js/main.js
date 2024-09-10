@@ -62,27 +62,27 @@ function crearObjetivo(){
   let numero = Math.floor(Math.random() * 5)
 
   if (numero === 0){
-  let newObjetivoMini = new Objetivo (490, "mini", 150, 90, 5)// se crea dentro de la función para añadirlo al array, pero no la necesitamos fuera
+  let newObjetivoMini = new Objetivo (670, "mini", 150, 90, 5)// se crea dentro de la función para añadirlo al array, pero no la necesitamos fuera
   objetivosArray.push(newObjetivoMini)
   }
   
   if (numero === 1){
-  let newObjetivoKid = new Objetivo (415, "kid", 45, 95, 1.5)
+  let newObjetivoKid = new Objetivo (615, "kid", 30, 50, 1.5)
   objetivosArray.push(newObjetivoKid)
   }
 
   if (numero === 2){
-  let newObjetivoGrandma = new Objetivo (410, "grandma", 150, 90, 1)
+  let newObjetivoGrandma = new Objetivo (570, "grandma", 90, 90, 1)
   objetivosArray.push(newObjetivoGrandma)
   }
 
   if (numero === 3){
-  let newObjetivoBike = new Objetivo (440, "bike", 100, 90, 3)
+  let newObjetivoBike = new Objetivo (595, "bike", 100, 90, 3)
   objetivosArray.push(newObjetivoBike)
   }
 
   if (numero === 4){
-  let newObjetivoConvertible = new Objetivo (520, "convertible", 150, 75, 5)
+  let newObjetivoConvertible = new Objetivo (720, "convertible", 150, 75, 5)
   objetivosArray.push(newObjetivoConvertible)
   }
   
