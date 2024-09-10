@@ -1,10 +1,10 @@
 class Bullet {
   constructor (x, y){
-    this.x = x
-    this.y = y
+    this.x = palomaObj.x + 20
+    this.y = palomaObj.y + palomaObj.h
     this.h = 45
     this.w = 35
-    this.gravitySpeed = 3
+    this.gravitySpeed = 4
 
      //añadir bullet
      this.node = document.createElement("img")

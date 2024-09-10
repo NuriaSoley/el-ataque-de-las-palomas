@@ -28,6 +28,7 @@ function startGame (){
   //añadir elementos
   palomaObj = new Paloma
   
+  
 
 
   // iniciar intervalo
@@ -51,20 +52,23 @@ function gameLoop (){//la que se ejecuta 60 vesces por segundo en el intervalo p
     eachObjetivo.objetivoAutomaticMovement ()
   })
 
+  objetivoRandom ()
+
   detectarSiObjetivoSalio()
 
-}
+  bulletArray.forEach((eachBullet) =>{
+    eachBullet.gravity()
+  })
+  detectarColisionBulletConObjetivos()
+ }
 
 
 function addObjetivo (){
 
-  let randomIndex = Math.floor (Math.random()*(objetivosArray.length))
-  let randomObjetivo = objetivosArray[randomIndex]
-
   let newObjetivoMini = new Objetivo (490, "mini", 150, 90, 5)// se crea dentro de la función para añadirlo al array, pero no la necesitamos fuera
   objetivosArray.push(newObjetivoMini)
   
-  let newObjetivoKid = new Objetivo (420, "kid", 50, 90, 1.5)
+  let newObjetivoKid = new Objetivo (420, "kid", 45, 95, 1.5)
   objetivosArray.push(newObjetivoKid)
 
   let newObjetivoGrandma = new Objetivo (410, "grandma", 150, 90, 1)
@@ -80,6 +84,17 @@ function addObjetivo (){
 }
 
 
+function objetivoRandom (){
+  let intervalObjetivos = setInterval (()=>{
+    if (objetivosArray.length === 0){
+      addObjetivo() // si el array esta vacio, añade uno
+    }
+    let randomIndex = Math.floor (Math.random()*(objetivosArray.length))
+    let randomObjetivo = objetivosArray[randomIndex]
+    return randomObjetivo
+  }, 1000)
+}
+
 function detectarSiObjetivoSalio (){
   
    if (objetivosArray.length === 0){ //al inicio del juego el array esta vacio, el metodo .shift no tiene nada para quitar por eso debemos hacer la clausula de guardia antes
@@ -92,7 +107,23 @@ function detectarSiObjetivoSalio (){
   }
 } 
 
-
+function detectarColisionBulletConObjetivos(){
+  //bullet => bulletArray.forEach para tener cada bullet
+  //cada uno de los objetivos => objetivosArray.forEach para tener cada objetivo
+  bulletArray.forEach ((eachBullet) => {
+    objetivosArray.forEach((eachObjetivo)=>{
+      if (
+        eachObjetivo.x < eachBullet.x + eachBullet.w &&
+        eachObjetivo.x + eachObjetivo.w > eachBullet.x &&
+        eachObjetivo.y < eachBullet.y + eachBullet.h &&
+        eachObjetivo.y + eachObjetivo.h > eachBullet.y
+          ) {
+        // Collision detected!
+        console.log("hit!")
+        }
+      })  
+  })
+}
 
 
 //EVENT LISTENERS
@@ -103,7 +134,7 @@ window.addEventListener("keydown", (event) => {//window porque no tiene nada que
   }else if (event.key === "a"){
     palomaObj.palomaMovement ("left")
   }else if (event.key === "s"){
-    const newBullet = palomaObj.shoot ()
+    const newBullet = palomaObj.shoot()
     bulletArray.push (newBullet)
   }
 })
