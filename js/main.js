@@ -14,7 +14,7 @@ const gameBoxNode = document.querySelector("#game-box")
 //VARIABLES GLOBALES DEL JUEGO
 let palomaObj = null
 let objetivosArray = []
-let frecuenciaObjetivos = 2000
+let frecuenciaObjetivos = 1500
 let bulletArray = []
 
 //FUNCIONES GLOBALES DEL JUEGO
@@ -29,8 +29,6 @@ function startGame (){
   palomaObj = new Paloma
   
   
-
-
   // iniciar intervalo
 setInterval (() => {
   gameLoop ()
@@ -39,10 +37,10 @@ setInterval (() => {
 
   // otros intervalos
   setInterval (()=>{
-    addObjetivo()
+    crearObjetivo()
+    getRandomObjetivo()
   }, frecuenciaObjetivos)
 }
-
 
 function gameLoop (){//la que se ejecuta 60 vesces por segundo en el intervalo principal
  
@@ -52,9 +50,7 @@ function gameLoop (){//la que se ejecuta 60 vesces por segundo en el intervalo p
     eachObjetivo.objetivoAutomaticMovement ()
   })
 
-  objetivoRandom ()
-
-  detectarSiObjetivoSalio()
+    detectarSiObjetivoSalio()
 
   bulletArray.forEach((eachBullet) =>{
     eachBullet.gravity()
@@ -62,38 +58,47 @@ function gameLoop (){//la que se ejecuta 60 vesces por segundo en el intervalo p
   detectarColisionBulletConObjetivos()
  }
 
+function crearObjetivo(){
+  let numero = Math.floor(Math.random() * 5)
 
-function addObjetivo (){
-
+  if (numero === 0){
   let newObjetivoMini = new Objetivo (490, "mini", 150, 90, 5)// se crea dentro de la función para añadirlo al array, pero no la necesitamos fuera
   objetivosArray.push(newObjetivoMini)
+  }
   
-  let newObjetivoKid = new Objetivo (420, "kid", 45, 95, 1.5)
+  if (numero === 1){
+  let newObjetivoKid = new Objetivo (415, "kid", 45, 95, 1.5)
   objetivosArray.push(newObjetivoKid)
+  }
 
+  if (numero === 2){
   let newObjetivoGrandma = new Objetivo (410, "grandma", 150, 90, 1)
   objetivosArray.push(newObjetivoGrandma)
+  }
 
+  if (numero === 3){
   let newObjetivoBike = new Objetivo (440, "bike", 100, 90, 3)
   objetivosArray.push(newObjetivoBike)
+  }
 
+  if (numero === 4){
   let newObjetivoConvertible = new Objetivo (520, "convertible", 150, 75, 5)
   objetivosArray.push(newObjetivoConvertible)
+  }
   
   console.log(objetivosArray)
 }
 
-
-function objetivoRandom (){
-  let intervalObjetivos = setInterval (()=>{
-    if (objetivosArray.length === 0){
-      addObjetivo() // si el array esta vacio, añade uno
-    }
-    let randomIndex = Math.floor (Math.random()*(objetivosArray.length))
-    let randomObjetivo = objetivosArray[randomIndex]
-    return randomObjetivo
-  }, 1000)
+function getRandomObjetivo (){
+  const randomIndex = Math.floor (Math.random()*(objetivosArray.length))
+  return objetivosArray[randomIndex]
 }
+
+function addObjetivo (){
+  getRandomObjetivo()
+  
+}
+
 
 function detectarSiObjetivoSalio (){
   
@@ -117,11 +122,21 @@ function detectarColisionBulletConObjetivos(){
         eachObjetivo.x + eachObjetivo.w > eachBullet.x &&
         eachObjetivo.y < eachBullet.y + eachBullet.h &&
         eachObjetivo.y + eachObjetivo.h > eachBullet.y
-          ) {
-        // Collision detected!
-        console.log("hit!")
-        }
-      })  
+        ){
+          //console.log("hit")
+          if (eachObjetivo.node){
+              eachObjetivo.node.remove()
+              objetivosArray.splice(objetivosArray.indexOf(eachObjetivo), 1)
+              //console.log("desaparece objetivo")
+
+            }
+          if (eachBullet.node){
+            eachBullet.node.remove()
+            bulletArray.splice(bulletArray.indexOf(eachBullet), 1)
+            //console.log("desaparece bala")
+          }
+         }
+      })
   })
 }
 
