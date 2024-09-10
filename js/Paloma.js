@@ -5,6 +5,7 @@ class Paloma {
     this.h = 50;
     this.w = 45;
     this.movementSpeed = 20;
+    this.canShoot = true
     
 
     //añadir paloma
@@ -35,5 +36,5 @@ class Paloma {
 
   shoot (){
     return new Bullet (`${this.x}px`, this.y)
+    }
   }
-}
