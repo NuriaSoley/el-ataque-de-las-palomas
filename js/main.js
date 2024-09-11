@@ -6,6 +6,8 @@ const gameOverScreenNode = document.querySelector("#game-over-screen")
 
 //botones
 const startBtnNode = document.querySelector("#start-btn")
+const restartBtnNode = document.querySelector("#restart-btn")
+const menuBtnNode = document.querySelector("#menu-btn")
 
 //game box
 const gameBoxNode = document.querySelector("#game-box")
@@ -22,6 +24,10 @@ let gameIntervalId = null
 let objetivosIntervalId = null
 
 
+//AUDIO
+let gameAmbientSound = new Audio ("./audio/city-street.mp3")
+gameAmbientSound.loop = true
+gameAmbientSound.volume = 0.1
 
 
 //FUNCIONES GLOBALES DEL JUEGO
@@ -31,7 +37,7 @@ function startGame (){
   splasScreenNode.style.display = "none" //ocultar la pantalla principal
   gameScreenNode.style.display = "flex" // que aparezca la pantalla de juego que estava oculta en el CSS
 
-
+  gameAmbientSound.play()
   //añadir elementos
   palomaObj = new Paloma
   
@@ -176,11 +182,33 @@ function gameOver (){
   clearInterval (objetivosIntervalId)
   gameScreenNode.style.display = "none"
   gameOverScreenNode.style.display = "flex"
+  gameAmbientSound.pause()
+  gameAmbientSound.currentTime = 0
+}
+
+function restartGame (){
+  
+  gameOverScreenNode.style.display = "none"
+  gameScreenNode.style.display = "flex"
+  gameBoxNode.innerHTML = ""
+  palomaObj = null
+  objetivosArray = []
+  bulletArray= []
+  gameIntervalId = null
+  objetivosIntervalId = null
+  startGame()
+}
+
+function backToMenu (){
+  gameOverScreenNode.style.display = "none"
+  splasScreenNode.style.display = "flex"
 }
 
 
 //EVENT LISTENERS
 startBtnNode.addEventListener("click", startGame)
+restartBtnNode.addEventListener("click", restartGame)
+menuBtnNode.addEventListener("click", backToMenu)
 window.addEventListener("keydown", (event) => {//window porque no tiene nada que ver con la pantalla
   if (event.key === "d"){
     palomaObj.palomaMovement ("right") // la función está dentro del obj Paloma, por lo que tengo que pedirle que me busque la propiedad función
@@ -195,3 +223,4 @@ window.addEventListener("keydown", (event) => {//window porque no tiene nada que
     palomaObj.jump()
   }
 })
+

@@ -5,7 +5,7 @@ class Paloma {
     this.h = 50;
     this.w = 45;
     this.movementSpeed = 20;
-    this.gravitySpeed = 2
+    this.gravitySpeed = 3
     this.canJump = true
     this.jumpSpeed = 130
     this.canShoot = true

@@ -7,12 +7,13 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
   <!--PANTALLA INICIO-->
   <div id="splash-screen" class ="container">
     <img src="./Images/logo.png" alt="logo" width="500">  
     <button id="start-btn">Let's poop!</button>
     <div id="instructions">
-        <h4>INSTRUCTIONS</h4>
+        <h4>HOW TO MOVE</h4>
         <ol>
           <li>Press A to move to the left</li>
           <li>Press D to move to the right</li>
@@ -21,6 +22,17 @@
           <li>Aim carefully!</li>
         </ol>
         <p>Show the world who is in charge by leaving your mark on everything! But be careful! Not everyone will let you do your job peacefully...</p>
+    </div>
+    <div id="targets">
+      <h4> KNOW YOUR TARGETS</h4>
+      <p>Grandma: the easiest target! She's so slow, you'll get 1 point in your way tot he top</p>
+      <p>Kid: not the fastest, but pretty small! You'll get 2 points for hitting him!</p>
+      <p>Bike: he always arrives sweaty wherever he may go so... another reason to smell bad won't matter! 3 points for catching him</p>
+      <p>Mini: there are so many cars like this one... I never know if I pooped on it yet or maybe it's a new one. You'll get 4 points.</p>
+      <p>Convertible: I mean... what's funniest than hearing someone scream on their car after our lovely gift... 5 points if you get them!</p>
+    </div>
+    <div id="classification">
+      <h4>POPULARITY CONTEST</h4>
     </div>
   </div>
 
@@ -34,12 +46,15 @@
   <!--PANTALLA FINAL-->
   <div id="game-over-screen" class="container">
     <img src="./Images/gameover.png" alt="game-over" width="400">
+    <button id="restart-btn">Try again!</button>
+    <button id="menu-btn">Main menu</button>
   </div>
 
 <script src="./js/main.js"></script>
 <script src="./js/Paloma.js"></script>
 <script src="./js/Bullet.js"></script>
 <script src="./js/Objetivo.js"></script>
+
 
 </body>
 </html>
