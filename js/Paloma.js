@@ -5,8 +5,10 @@ class Paloma {
     this.h = 50;
     this.w = 45;
     this.movementSpeed = 20;
-    this.gravitySpeed = 10
-    this.jumpSpeed = 10
+    this.gravitySpeed = 2
+    this.canJump = true
+    this.jumpSpeed = 130
+    this.canShoot = true
      
       
     //añadir paloma
@@ -36,20 +38,37 @@ class Paloma {
   }
 
   shoot (){
-    return new Bullet (`${this.x}px`, this.y)
+    if (this.canShoot === false){ //si es falso, no puede disparar, no ejecutes la funcion
+      return
     }
+    this.canShoot = false
+    const newBullet = new Bullet (`${this.x}px`, this.y)
+    setTimeout (()=> {
+      this.canShoot = true
+    }, 1000)
+    return newBullet
+  }
   
+  jump (){
+    if (this.canJump === false){
+      return
+    }
+    this.canJump = false
+    this.y -= this.jumpSpeed
+    this.node.style.top = `${this.y}px`
+    setTimeout (()=> {
+      this.canJump = true
+    }, 500)
+  }
 
   gravity(){
+    if (this.y > 225){
+      return
+    }
     this.y += this.gravitySpeed
     this.node.style.top = `${this.y}px`
   }
 
-  jump (){
-    this.y -= this.jumpSpeed
-    this.node.style.top = `${this.y}px`
-  }
 }
 
-  
 

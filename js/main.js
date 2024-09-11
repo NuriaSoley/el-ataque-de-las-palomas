@@ -11,6 +11,8 @@ const startBtnNode = document.querySelector("#start-btn")
 const gameBoxNode = document.querySelector("#game-box")
 
 
+
+
 //VARIABLES GLOBALES DEL JUEGO
 let palomaObj = null
 let objetivosArray = []
@@ -18,6 +20,9 @@ let frecuenciaObjetivos = 1500
 let bulletArray = []
 let gameIntervalId = null
 let objetivosIntervalId = null
+
+
+
 
 //FUNCIONES GLOBALES DEL JUEGO
 function startGame (){
@@ -58,7 +63,11 @@ function gameLoop (){//la que se ejecuta 60 vesces por segundo en el intervalo p
     eachBullet.gravity()
   })
   detectarColisions()
- }
+
+  palomaObj.gravity()
+  
+}
+
 
 function crearObjetivo(){
   let numero = Math.floor(Math.random() * 6)
@@ -169,6 +178,7 @@ function gameOver (){
   gameOverScreenNode.style.display = "flex"
 }
 
+
 //EVENT LISTENERS
 startBtnNode.addEventListener("click", startGame)
 window.addEventListener("keydown", (event) => {//window porque no tiene nada que ver con la pantalla
@@ -178,9 +188,10 @@ window.addEventListener("keydown", (event) => {//window porque no tiene nada que
     palomaObj.palomaMovement ("left")
   }else if (event.key === "s"){
     const newBullet = palomaObj.shoot()
+    if (newBullet){
     bulletArray.push (newBullet)
+    }
   }else if (event.key === "w"){
     palomaObj.jump()
-    palomaObj.gravity()
   }
 })
