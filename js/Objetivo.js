@@ -1,10 +1,11 @@
 class Objetivo {
-  constructor (posiitionY, type, w, h, speed){
-    this.x = gameBoxNode.offsetWidth
+  constructor (positionX, posiitionY, type, w, h, speed, direction){
+    this.x = positionX
     this.y = posiitionY
     this.w = w
     this.h = h
     this.speed = speed
+    this.direction = direction
 
     //crear el objetivo
     this.node = document.createElement("img")
@@ -18,6 +19,8 @@ class Objetivo {
       this.node.src="./Images/Kid.png"
     }else if(type === "grandma"){
       this.node.src="./Images/grandma.png"
+    }else if (type === "cat"){
+      this.node.src = "./Images/cat.png"
     }
     gameBoxNode.append(this.node)
 
@@ -33,7 +36,13 @@ class Objetivo {
   }
 
   objetivoAutomaticMovement (){
-    this.x -= this.speed
-    this.node.style.left = `${this.x}px`
+    if (this.direction === "left"){
+      this.x -= this.speed
+      this.node.style.left = `${this.x}px`
+    } else if (this.direction === "right"){
+      this.x += this.speed
+      this.node.style.left = `${this.x}px`
+      console.log("Va a la derecha", this.x)
+    }
   }
 }

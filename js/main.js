@@ -59,32 +59,37 @@ function gameLoop (){//la que se ejecuta 60 vesces por segundo en el intervalo p
  }
 
 function crearObjetivo(){
-  let numero = Math.floor(Math.random() * 5)
+  let numero = Math.floor(Math.random() * 6)
 
   if (numero === 0){
-  let newObjetivoMini = new Objetivo (670, "mini", 150, 90, 5)// se crea dentro de la función para añadirlo al array, pero no la necesitamos fuera
+  let newObjetivoMini = new Objetivo (gameBoxNode.offsetWidth, 670, "mini", 150, 90, 5, "left")// se crea dentro de la función para añadirlo al array, pero no la necesitamos fuera
   objetivosArray.push(newObjetivoMini)
   }
   
   if (numero === 1){
-  let newObjetivoKid = new Objetivo (615, "kid", 30, 50, 1.5)
+  let newObjetivoKid = new Objetivo (gameBoxNode.offsetWidth, 615, "kid", 30, 50, 1.5, "left")
   objetivosArray.push(newObjetivoKid)
   }
 
   if (numero === 2){
-  let newObjetivoGrandma = new Objetivo (570, "grandma", 90, 90, 1)
+  let newObjetivoGrandma = new Objetivo (gameBoxNode.offsetWidth, 570, "grandma", 90, 90, 1, "left")
   objetivosArray.push(newObjetivoGrandma)
   }
 
   if (numero === 3){
-  let newObjetivoBike = new Objetivo (595, "bike", 100, 90, 3)
+  let newObjetivoBike = new Objetivo (gameBoxNode.offsetWidth, 595, "bike", 100, 90, 3, "left")
   objetivosArray.push(newObjetivoBike)
   }
 
   if (numero === 4){
-  let newObjetivoConvertible = new Objetivo (720, "convertible", 150, 75, 5)
+  let newObjetivoConvertible = new Objetivo (gameBoxNode.offsetWidth, 720, "convertible", 150, 75, 5, "left")
   objetivosArray.push(newObjetivoConvertible)
   }
+
+  if (numero === 5){
+    let newObjetivoCat = new Objetivo (0, 220, "cat", 65, 60, 5, "right")
+    objetivosArray.push(newObjetivoCat)
+    }
   
   console.log(objetivosArray)
 }
@@ -151,5 +156,7 @@ window.addEventListener("keydown", (event) => {//window porque no tiene nada que
   }else if (event.key === "s"){
     const newBullet = palomaObj.shoot()
     bulletArray.push (newBullet)
+  }else if (event.key === "w"){
+    palomaObj.jump()
   }
 })
