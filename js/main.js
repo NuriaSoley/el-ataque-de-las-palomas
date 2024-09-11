@@ -16,6 +16,8 @@ let palomaObj = null
 let objetivosArray = []
 let frecuenciaObjetivos = 1500
 let bulletArray = []
+let gameIntervalId = null
+let objetivosIntervalId = null
 
 //FUNCIONES GLOBALES DEL JUEGO
 function startGame (){
@@ -30,13 +32,13 @@ function startGame (){
   
   
   // iniciar intervalo
-setInterval (() => {
+gameIntervalId = setInterval (() => {
   gameLoop ()
 }, Math.round(1000/60))
 
 
   // otros intervalos
-  setInterval (()=>{
+objetivosIntervalId = setInterval (()=>{
     crearObjetivo()
     getRandomObjetivo()
   }, frecuenciaObjetivos)
@@ -55,7 +57,7 @@ function gameLoop (){//la que se ejecuta 60 vesces por segundo en el intervalo p
   bulletArray.forEach((eachBullet) =>{
     eachBullet.gravity()
   })
-  detectarColisionBulletConObjetivos()
+  detectarColisions()
  }
 
 function crearObjetivo(){
@@ -111,13 +113,14 @@ function detectarSiObjetivoSalio (){
     return // no ejecuta la funcion
   }
   
-  if ((objetivosArray[0].x + objetivosArray[0].w) <= 0){ //si el 1r objetivo del array sale del canvas (su posición X es menor o igual a 0), quitalo. Se suma w a la x para que tenga en cuenta el momento en el que el lado derecho del objetivo sale
+  if (objetivosArray[0].x <= 0|| objetivosArray[0].x >= gameBoxNode.offsetWidth){ //si el 1r objetivo del array sale del canvas (su posición X es menor o igual a 0), quitalo. Se suma w a la x para que tenga en cuenta el momento en el que el lado derecho del objetivo sale
     objetivosArray[0].node.remove()
     objetivosArray.shift()
-  }
-} 
+  } 
+}
 
-function detectarColisionBulletConObjetivos(){
+function detectarColisions(){
+  //* colision entre bala y objetivos
   //bullet => bulletArray.forEach para tener cada bullet
   //cada uno de los objetivos => objetivosArray.forEach para tener cada objetivo
   bulletArray.forEach ((eachBullet) => {
@@ -143,8 +146,28 @@ function detectarColisionBulletConObjetivos(){
          }
       })
   })
+
+  //*colision entre paloma y gato
+ objetivosArray.forEach ((eachObjetivo) => {
+    if (
+      palomaObj.x < eachObjetivo.x + eachObjetivo.w &&
+      palomaObj.x + palomaObj.w > eachObjetivo.x &&
+      palomaObj.y < eachObjetivo.y + eachObjetivo.h &&
+      palomaObj.y + palomaObj.h > eachObjetivo.y
+    ) {
+      // Collision detected!
+      // console.log("El gato se came la paloma!")
+      gameOver ()
+    }
+  })
 }
 
+function gameOver (){
+  clearInterval (gameIntervalId)
+  clearInterval (objetivosIntervalId)
+  gameScreenNode.style.display = "none"
+  gameOverScreenNode.style.display = "flex"
+}
 
 //EVENT LISTENERS
 startBtnNode.addEventListener("click", startGame)
@@ -158,5 +181,6 @@ window.addEventListener("keydown", (event) => {//window porque no tiene nada que
     bulletArray.push (newBullet)
   }else if (event.key === "w"){
     palomaObj.jump()
+    palomaObj.gravity()
   }
 })

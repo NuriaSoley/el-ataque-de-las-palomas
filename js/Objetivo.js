@@ -42,7 +42,6 @@ class Objetivo {
     } else if (this.direction === "right"){
       this.x += this.speed
       this.node.style.left = `${this.x}px`
-      console.log("Va a la derecha", this.x)
     }
   }
 }

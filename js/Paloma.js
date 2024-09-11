@@ -5,12 +5,10 @@ class Paloma {
     this.h = 50;
     this.w = 45;
     this.movementSpeed = 20;
-    this.canShoot = true
-    this.jumpSpeed = 2
-    this.gravitySpeed = 2
-    this.isJumping = false
-  
-    
+    this.gravitySpeed = 10
+    this.jumpSpeed = 10
+     
+      
     //añadir paloma
     this.node = document.createElement("img")
     this.node.src="./Images/Paloma.png"
@@ -40,5 +38,18 @@ class Paloma {
   shoot (){
     return new Bullet (`${this.x}px`, this.y)
     }
+  
+
+  gravity(){
+    this.y += this.gravitySpeed
+    this.node.style.top = `${this.y}px`
   }
+
+  jump (){
+    this.y -= this.jumpSpeed
+    this.node.style.top = `${this.y}px`
+  }
+}
+
+  
 
