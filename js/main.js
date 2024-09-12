@@ -151,7 +151,6 @@ function detectarSiObjetivoSalio (){
   } 
 }
 
-//!REVISAR - NO SUMA!
 function updateScore(){
   scoreDisplayNode.innerText = `Points ${score}`
  }
@@ -215,7 +214,6 @@ function detectarColisions(){
     }
   })
 }
-
 
 function gameOver (){
   clearInterval (gameIntervalId)
