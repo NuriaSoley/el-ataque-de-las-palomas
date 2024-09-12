@@ -4,57 +4,85 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pigeon's attack!</title>
+  <link rel="icon" type="image/x-icon" href="./Images/Paloma.png">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <!--PANTALLA INICIO-->
-  <div id="splash-screen" class ="container">
-    <img src="./Images/logo.png" alt="logo" width="500">  
-    <button id="start-btn">Let's poop!</button>
-    <div id="instructions">
+  <section id="splash-screen" class ="container">
+    <div id="start">
+      <h1>PIDGEON'S<br> ATTACK!</h1>
+      <button id="start-btn">PLAY</button>
+    </div>
+
+    <p>Show the world who is in charge by leaving your mark on everything! But be careful! Not everyone will let you do your job peacefully...</p>
+    <div id="columns">
+
+      <div id="instructions" class="column">
         <h4>HOW TO MOVE</h4>
-        <ol>
-          <li>Press A to move to the left</li>
-          <li>Press D to move to the right</li>
-          <li>Press S to poop</li>
-          <li>Press W to jump</li>
-          <li>Aim carefully!</li>
-        </ol>
-        <p>Show the world who is in charge by leaving your mark on everything! But be careful! Not everyone will let you do your job peacefully...</p>
+          <ol>
+            <li>Press A to move to the left</li>
+            <li>Press D to move to the right</li>
+            <li>Press S to poop</li>
+            <li>Press W to jump</li>
+            <li>Aim carefully!</li>
+          </ol>
+          <img class="controls" src="./Images/wasd.png" alt="">
+      </div>
+  
+      
+      <div id="classification" class="column">
+        <h4>POPULARITY CONTEST</h4>
+        <div class="playerName">
+          <label for="name">Write your name!</label>
+          <input type="text" id="name" placeholder="Pigeon">
+          <ul id="popularity-list"></ul>
+        </div>
+      </div>
+      
     </div>
-    <div id="targets">
-      <h4> KNOW YOUR TARGETS</h4>
-      <ul>
-        <li>Grandma: the easiest target! She's so slow, you'll get 1 point in your way to the top</li>
-        <li>Kid: not the fastest, but pretty small! You'll get 2 points for hitting him!</li>
-        <li>Bike: he always arrives sweaty wherever he may go so... another reason to smell bad won't matter! 3 points for catching him</li>
-        <li>Mini: there are so many cars like this one... I never know if I pooped on it yet or maybe it's a new one. You'll get 4 points.</li>
-        <li>Convertible: I mean... what's funniest than hearing someone scream on their car after our lovely gift... 5 points if you get them!</li>
-        <li>Cat: Watch out!! the cats around the neighborhood are always hungry and they keep coming!</li>
-      </ul>
-    </div>
-    <div id="classification">
-      <h4>POPULARITY CONTEST</h4>
-    </div>
-  </div>
+      <div id="targets">
+        <h4> KNOW YOUR TARGETS</h4>
+        <ul>
+          <li>Grandma: the easiest target! She's so slow, you'll get 1 point in your way to the top</li>
+          <li>Kid: not the fastest, but pretty small! You'll get 2 points for hitting him!</li>
+          <li>Bike: he always arrives sweaty wherever he may go so... another reason to smell bad won't matter! 3 points for catching him</li>
+          <li>Mini: there are so many cars like this one... I never know if I pooped on it yet or maybe it's a new one. You'll get 4 points.</li>
+          <li>Convertible: I mean... what's funniest than hearing someone scream on their car after our lovely gift... 5 points if you get them!</li>
+          <li>Cat: Watch out!! the cats around the neighborhood are always hungry and they keep coming!</li>
+        </ul>
+      </div>
+
+
+  </section>
+
 
   <!--PANTALLA DE JUEGO-->
   <div id="game-screen" class="container">
+
     <div id="scoreDisplay">Points: 0</div>
+
     <!--Elementos de vidas y puntuación antes del game-box-->
     <div id="game-box">
+
     </div>
+
   </div>
+
 
   <!--PANTALLA FINAL-->
   <div id="game-over-screen" class="container">
-    <img src="./Images/gameover.png" alt="game-over" width="400">
-      <div id="classification"></div>
-        <h4>POPULARITY CONTEST</h4>
-        <ul></ul>
+    <h1>GAME<br>OVER</h1>
+    <img class="roasted-chicken" src="./Images/roasted.png" alt="roasted-chicken">
+    <div>
+      <p>Your final score is:</p>
+      <p id="totalScore"></p>
+    </div>
+  
     <button id="restart-btn">Try again!</button>
     <button id="menu-btn">Main menu</button>
+
   </div>
 
 <script src="./js/main.js"></script>

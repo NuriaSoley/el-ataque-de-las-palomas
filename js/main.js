@@ -3,7 +3,9 @@
 const splasScreenNode = document.querySelector("#splash-screen")
 const gameScreenNode = document.querySelector("#game-screen")
 const gameOverScreenNode = document.querySelector("#game-over-screen")
+const inputNameNode = document.querySelector("#name")//nodo para el input donde el jugador introduce el nombre
 const scoreDisplayNode = document.querySelector("#scoreDisplay")
+const scoreList = document.querySelector("#popularity-list")
 
 //botones
 const startBtnNode = document.querySelector("#start-btn")
@@ -15,7 +17,6 @@ const gameBoxNode = document.querySelector("#game-box")
 
 
 
-
 //VARIABLES GLOBALES DEL JUEGO
 let palomaObj = null
 let objetivosArray = []
@@ -24,6 +25,7 @@ let bulletArray = []
 let gameIntervalId = null
 let objetivosIntervalId = null
 let score = 0
+let playerName = ""
 
 
 //AUDIO
@@ -151,10 +153,6 @@ function detectarSiObjetivoSalio (){
   } 
 }
 
-function updateScore(){
-  scoreDisplayNode.innerText = `Points ${score}`
- }
-
 function detectarColisions(){
   //* colision entre bala y objetivos
   //bullet => bulletArray.forEach para tener cada bullet
@@ -170,15 +168,19 @@ function detectarColisions(){
           splashSound.play()
           if (eachObjetivo.type === "grandma"){
             score += 1
-            console.log(score)
+            updateScore()
           }else if (eachObjetivo.type === "kid"){
             score += 2
+            updateScore()
           }else if (eachObjetivo.type === "bike"){
             score += 3
+            updateScore()
           }else if (eachObjetivo.type === "mini"){
             score += 4
+            updateScore()
           }else if (eachObjetivo.type === "convertible"){
             score += 5
+            updateScore()
           }
           console.log("Score:", score)
           
@@ -198,6 +200,9 @@ function detectarColisions(){
       })
   })
 
+  function updateScore(){
+    scoreDisplayNode.innerText = `Points: ${score}`
+   }
 
   //*colision entre paloma y gato
  objetivosArray.forEach ((eachObjetivo) => {
@@ -222,8 +227,13 @@ function gameOver (){
   gameOverScreenNode.style.display = "flex"
   gameAmbientSound.pause()
   pigeonSound.pause()
+  gameMusic.pause()
   gameAmbientSound.currentTime = 0
   pigeonSound.currentTime = 0
+  gameMusic.currentTime = 0
+  getPlayerName()
+  storeScore(playerName, score)
+  showScores(scoreList)
 }
 
 function restartGame (){
@@ -252,8 +262,45 @@ function backToMenu (){
   objetivosIntervalId = null
   score = 0
   scoreDisplayNode.innerText = `Points ${score}`
+  gameMusic.currentTime = 0
 }
 
+function getPlayerName (){ //para guardar el nombre que el jugador escribe en pantalla inicio
+  let inputName = inputNameNode.value.trim()
+  if (inputName.length === 0){
+    playerName = "Pigeon"
+    inputNameNode.value = "Pigeon"
+  }else{
+    playerName = inputName
+  }
+}
+
+
+//!funciones para el localStorage
+function storeScore(name, score) {
+  const newScore = { name, score };
+
+  let scores = JSON.parse(localStorage.getItem('scores')) || [];
+  scores.push(newScore);
+  localStorage.setItem('scores', JSON.stringify(scores));
+}
+
+function showScores(listElement) {
+  // Limpiar la lista de puntuaciones anterior
+  listElement.innerHTML = ''; 
+
+  const scores = JSON.parse(localStorage.getItem('scores')) || [];
+
+  scores.sort((a, b) => b.score - a.score);
+
+  const bestScores = scores.slice(0, 5);
+
+  bestScores.forEach(score => {
+    const li = document.createElement('li');
+    li.textContent = `${score.name} - ${score.score} points`;
+    listElement.appendChild(li);
+  });
+}
 
 //EVENT LISTENERS
 startBtnNode.addEventListener("click", startGame)
