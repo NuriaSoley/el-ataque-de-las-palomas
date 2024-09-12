@@ -76,7 +76,7 @@ objetivosIntervalId = setInterval (()=>{
   }, frecuenciaObjetivos)
 }
 
-function gameLoop (){//la que se ejecuta 60 vesces por segundo en el intervalo principal
+function gameLoop (){//la que se ejecuta 60 veces por segundo en el intervalo principal
  
   palomaObj.palomaMovement()
 

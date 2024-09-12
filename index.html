@@ -10,17 +10,21 @@
 <body>
 
   <!--PANTALLA INICIO-->
-  <section id="splash-screen" class ="container">
+  <section id="splash-screen" class="main-container">
     <div id="start">
-      <h1>PIDGEON'S<br> ATTACK!</h1>
+      <h1>PIGEON'S<br> ATTACK!</h1>
       <button id="start-btn">PLAY</button>
     </div>
 
-    <p>Show the world who is in charge by leaving your mark on everything! But be careful! Not everyone will let you do your job peacefully...</p>
+    <div id="introduction" class="container">
+      <p>Show the world who is in charge by leaving your mark on everything! But be careful! Not everyone will let you do your job peacefully... </p>
+    </div>
+
     <div id="columns">
 
-      <div id="instructions" class="column">
-        <h4>HOW TO MOVE</h4>
+      <div id="instructions" class="container">
+        <h4>CONTROLS</h4>
+        <div id="information">
           <ol>
             <li>Press A to move to the left</li>
             <li>Press D to move to the right</li>
@@ -28,11 +32,12 @@
             <li>Press W to jump</li>
             <li>Aim carefully!</li>
           </ol>
-          <img class="controls" src="./Images/wasd.png" alt="">
+         <img id="information" class="controls" src="./Images/wasd.png" alt="">
+        </div>
       </div>
   
       
-      <div id="classification" class="column">
+      <div id="classification" class="container">
         <h4>POPULARITY CONTEST</h4>
         <div class="playerName">
           <label for="name">Write your name!</label>
@@ -42,15 +47,15 @@
       </div>
       
     </div>
-      <div id="targets">
+      <div id="targets" class="container">
         <h4> KNOW YOUR TARGETS</h4>
         <ul>
-          <li>Grandma: the easiest target! She's so slow, you'll get 1 point in your way to the top</li>
-          <li>Kid: not the fastest, but pretty small! You'll get 2 points for hitting him!</li>
-          <li>Bike: he always arrives sweaty wherever he may go so... another reason to smell bad won't matter! 3 points for catching him</li>
-          <li>Mini: there are so many cars like this one... I never know if I pooped on it yet or maybe it's a new one. You'll get 4 points.</li>
-          <li>Convertible: I mean... what's funniest than hearing someone scream on their car after our lovely gift... 5 points if you get them!</li>
-          <li>Cat: Watch out!! the cats around the neighborhood are always hungry and they keep coming!</li>
+          <li><span class="target">Grandma:</span> the easiest target! She's so slow, you'll get 1 point in your way to the top</li>
+          <li><span class="target">Kid:</span> not the fastest, but pretty small! You'll get 2 points for hitting him!</li>
+          <li><span class="target">Bike:</span> he always arrives sweaty wherever he may go so... another reason to smell bad won't matter! 3 points for catching him</li>
+          <li><span class="target">Mini:</span> there are so many cars like this one... I never know if I pooped on it yet or maybe it's a new one. You'll get 4 points.</li>
+          <li><span class="target">Convertible:</span> I mean... what's funniest than hearing someone scream on their car after our lovely gift... 5 points if you get them!</li>
+          <li><span class="target">Cat:</span> Watch out!! the cats around the neighborhood are always hungry and they keep coming!</li>
         </ul>
       </div>
 
@@ -59,7 +64,7 @@
 
 
   <!--PANTALLA DE JUEGO-->
-  <div id="game-screen" class="container">
+  <div id="game-screen" class="main-container">
 
     <div id="scoreDisplay">Points: 0</div>
 
@@ -72,16 +77,19 @@
 
 
   <!--PANTALLA FINAL-->
-  <div id="game-over-screen" class="container">
-    <h1>GAME<br>OVER</h1>
-    <img class="roasted-chicken" src="./Images/roasted.png" alt="roasted-chicken">
+  <div id="game-over-screen" class="main-container">
+    <div id="end">
+      <h1>GAME<br>OVER</h1>
+      <img id="roasted-chicken" src="./Images/roasted.png" alt="roasted-chicken">
+    </div>
     <div>
       <p>Your final score is:</p>
       <p id="totalScore"></p>
     </div>
-  
-    <button id="restart-btn">Try again!</button>
-    <button id="menu-btn">Main menu</button>
+    <div id="buttons">
+      <button id="restart-btn">Again!</button>
+      <button id="menu-btn">Main menu</button>
+    </div>
 
   </div>
 
