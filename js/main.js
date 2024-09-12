@@ -39,6 +39,12 @@ wingsSound.volume = 0.1
 let pigeonSound = new Audio ("./audio/pigeon-coo.mp3")
 pigeonSound.loop = true
 pigeonSound.volume = 0.2
+let gameMusic = new Audio ("./audio/Bossfight-Flirt_Flirt_Oh_It_hurts.mp3")
+gameMusic.loop = false
+gameMusic.volume = 0.04
+
+
+gameMusic.play()
 
 
 //FUNCIONES GLOBALES DEL JUEGO
@@ -50,6 +56,7 @@ function startGame (){
 
   gameAmbientSound.play()
   pigeonSound.play()
+  
   //añadir elementos
   palomaObj = new Paloma
   
@@ -144,11 +151,10 @@ function detectarSiObjetivoSalio (){
   } 
 }
 
-//!Revisar!!!!!!!! No suma puntos
-function updateScore(points){
-  score += points
+//!REVISAR - NO SUMA!
+function updateScore(){
   scoreDisplayNode.innerText = `Points ${score}`
-}
+ }
 
 function detectarColisions(){
   //* colision entre bala y objetivos
@@ -164,16 +170,19 @@ function detectarColisions(){
         ){
           splashSound.play()
           if (eachObjetivo.type === "grandma"){
-            updateScore(1)
+            score += 1
+            console.log(score)
           }else if (eachObjetivo.type === "kid"){
-            updateScore(2)
+            score += 2
           }else if (eachObjetivo.type === "bike"){
-            updateScore(3)
+            score += 3
           }else if (eachObjetivo.type === "mini"){
-            updateScore(4)
-          }else if (eachObjetivo.type === "kid"){
-            updateScore(5)
+            score += 4
+          }else if (eachObjetivo.type === "convertible"){
+            score += 5
           }
+          console.log("Score:", score)
+          
           //console.log("hit")
           if (eachObjetivo.node){
               eachObjetivo.node.remove()
@@ -189,6 +198,7 @@ function detectarColisions(){
          }
       })
   })
+
 
   //*colision entre paloma y gato
  objetivosArray.forEach ((eachObjetivo) => {
@@ -242,7 +252,7 @@ function backToMenu (){
   bulletArray= []
   gameIntervalId = null
   objetivosIntervalId = null
-   score = 0
+  score = 0
   scoreDisplayNode.innerText = `Points ${score}`
 }
 

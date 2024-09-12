@@ -6,6 +6,7 @@ class Objetivo {
     this.h = h
     this.speed = speed
     this.direction = direction
+    this.type = type
 
     //crear el objetivo
     this.node = document.createElement("img")
