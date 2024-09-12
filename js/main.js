@@ -3,6 +3,7 @@
 const splasScreenNode = document.querySelector("#splash-screen")
 const gameScreenNode = document.querySelector("#game-screen")
 const gameOverScreenNode = document.querySelector("#game-over-screen")
+const scoreDisplayNode = document.querySelector("#scoreDisplay")
 
 //botones
 const startBtnNode = document.querySelector("#start-btn")
@@ -22,12 +23,22 @@ let frecuenciaObjetivos = 1500
 let bulletArray = []
 let gameIntervalId = null
 let objetivosIntervalId = null
+let score = 0
 
 
 //AUDIO
 let gameAmbientSound = new Audio ("./audio/city-street.mp3")
 gameAmbientSound.loop = true
 gameAmbientSound.volume = 0.1
+let splashSound = new Audio ("./audio/wet-splat.mp3")
+splashSound.volume = 0.1
+let catSound = new Audio ("./audio/angry-cat.mp3")
+catSound.volume = 0.2
+let wingsSound = new Audio ("./audio/wing-flaps.wav")
+wingsSound.volume = 0.1
+let pigeonSound = new Audio ("./audio/pigeon-coo.mp3")
+pigeonSound.loop = true
+pigeonSound.volume = 0.2
 
 
 //FUNCIONES GLOBALES DEL JUEGO
@@ -38,6 +49,7 @@ function startGame (){
   gameScreenNode.style.display = "flex" // que aparezca la pantalla de juego que estava oculta en el CSS
 
   gameAmbientSound.play()
+  pigeonSound.play()
   //añadir elementos
   palomaObj = new Paloma
   
@@ -73,7 +85,6 @@ function gameLoop (){//la que se ejecuta 60 vesces por segundo en el intervalo p
   palomaObj.gravity()
   
 }
-
 
 function crearObjetivo(){
   let numero = Math.floor(Math.random() * 6)
@@ -121,7 +132,6 @@ function addObjetivo (){
   
 }
 
-
 function detectarSiObjetivoSalio (){
   
    if (objetivosArray.length === 0){ //al inicio del juego el array esta vacio, el metodo .shift no tiene nada para quitar por eso debemos hacer la clausula de guardia antes
@@ -132,6 +142,12 @@ function detectarSiObjetivoSalio (){
     objetivosArray[0].node.remove()
     objetivosArray.shift()
   } 
+}
+
+//!Revisar!!!!!!!! No suma puntos
+function updateScore(points){
+  score += points
+  scoreDisplayNode.innerText = `Points ${score}`
 }
 
 function detectarColisions(){
@@ -146,6 +162,18 @@ function detectarColisions(){
         eachObjetivo.y < eachBullet.y + eachBullet.h &&
         eachObjetivo.y + eachObjetivo.h > eachBullet.y
         ){
+          splashSound.play()
+          if (eachObjetivo.type === "grandma"){
+            updateScore(1)
+          }else if (eachObjetivo.type === "kid"){
+            updateScore(2)
+          }else if (eachObjetivo.type === "bike"){
+            updateScore(3)
+          }else if (eachObjetivo.type === "mini"){
+            updateScore(4)
+          }else if (eachObjetivo.type === "kid"){
+            updateScore(5)
+          }
           //console.log("hit")
           if (eachObjetivo.node){
               eachObjetivo.node.remove()
@@ -172,10 +200,12 @@ function detectarColisions(){
     ) {
       // Collision detected!
       // console.log("El gato se came la paloma!")
+      catSound.play()
       gameOver ()
     }
   })
 }
+
 
 function gameOver (){
   clearInterval (gameIntervalId)
@@ -183,7 +213,9 @@ function gameOver (){
   gameScreenNode.style.display = "none"
   gameOverScreenNode.style.display = "flex"
   gameAmbientSound.pause()
+  pigeonSound.pause()
   gameAmbientSound.currentTime = 0
+  pigeonSound.currentTime = 0
 }
 
 function restartGame (){
@@ -196,19 +228,32 @@ function restartGame (){
   bulletArray= []
   gameIntervalId = null
   objetivosIntervalId = null
+  score = 0
+  scoreDisplayNode.innerText = `Points ${score}`
   startGame()
 }
 
 function backToMenu (){
   gameOverScreenNode.style.display = "none"
   splasScreenNode.style.display = "flex"
+  gameBoxNode.innerHTML = ""
+  palomaObj = null
+  objetivosArray = []
+  bulletArray= []
+  gameIntervalId = null
+  objetivosIntervalId = null
+   score = 0
+  scoreDisplayNode.innerText = `Points ${score}`
 }
 
 
 //EVENT LISTENERS
 startBtnNode.addEventListener("click", startGame)
+
 restartBtnNode.addEventListener("click", restartGame)
+
 menuBtnNode.addEventListener("click", backToMenu)
+
 window.addEventListener("keydown", (event) => {//window porque no tiene nada que ver con la pantalla
   if (event.key === "d"){
     palomaObj.palomaMovement ("right") // la función está dentro del obj Paloma, por lo que tengo que pedirle que me busque la propiedad función
@@ -220,6 +265,7 @@ window.addEventListener("keydown", (event) => {//window porque no tiene nada que
     bulletArray.push (newBullet)
     }
   }else if (event.key === "w"){
+    wingsSound.play()
     palomaObj.jump()
   }
 })
