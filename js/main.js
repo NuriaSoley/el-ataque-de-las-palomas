@@ -12,7 +12,8 @@ const scoreListEnd = document.querySelector("#popularity-list-end")
 const startBtnNode = document.querySelector("#start-btn")
 const restartBtnNode = document.querySelector("#restart-btn")
 const menuBtnNode = document.querySelector("#menu-btn")
-const muteBtnNode = document.querySelector("#mute")
+const musicBtnNode = document.querySelector("#music-on")
+const muteBtnNode = document.querySelector("#music-off")
 
 //game box
 const gameBoxNode = document.querySelector("#game-box")
@@ -47,7 +48,7 @@ let gameMusic = new Audio ("./audio/Bossfight-Flirt_Flirt_Oh_It_hurts.mp3")
 gameMusic.loop = false
 gameMusic.volume = 0.04
 
-
+gameMusic.play()
 showScoresStart()
 
 //FUNCIONES GLOBALES DEL JUEGO
@@ -59,6 +60,7 @@ function startGame (){
 
   gameAmbientSound.play()
   pigeonSound.play()
+  musicBtnNode.disabled = true
   
   //añadir elementos
   palomaObj = new Paloma
@@ -128,8 +130,6 @@ function crearObjetivo(){
     let newObjetivoCat = new Objetivo (0, 220, "cat", 65, 60, 5, "right")
     objetivosArray.push(newObjetivoCat)
     }
-  
-  console.log(objetivosArray)
 }
 
 function getRandomObjetivo (){
@@ -183,19 +183,14 @@ function detectarColisions(){
             score += 5
             updateScore()
           }
-          console.log("Score:", score)
           
-          //console.log("hit")
           if (eachObjetivo.node){
               eachObjetivo.node.remove()
               objetivosArray.splice(objetivosArray.indexOf(eachObjetivo), 1)
-              //console.log("desaparece objetivo")
-
             }
           if (eachBullet.node){
             eachBullet.node.remove()
             bulletArray.splice(bulletArray.indexOf(eachBullet), 1)
-            //console.log("desaparece bala")
           }
          }
       })
@@ -214,7 +209,6 @@ function detectarColisions(){
       palomaObj.y + palomaObj.h > eachObjetivo.y
     ) {
       // Collision detected!
-      // console.log("El gato se came la paloma!")
       catSound.play()
       gameOver ()
     }
@@ -337,7 +331,17 @@ restartBtnNode.addEventListener("click", restartGame)
 
 menuBtnNode.addEventListener("click", backToMenu)
 
-muteBtnNode.addEventListener("click", stopMusic)
+musicBtnNode.addEventListener("click", ()=>{
+  gameMusic.play()
+  musicBtnNode.disabled = true
+  muteBtnNode.disabled = false
+})
+
+muteBtnNode.addEventListener("click", ()=>{
+  gameMusic.pause()
+  musicBtnNode.disabled = false
+  muteBtnNode.disables = true
+})
 
 window.addEventListener("keydown", (event) => {//window porque no tiene nada que ver con la pantalla
   if (event.key === "d"){

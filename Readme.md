@@ -35,3 +35,9 @@ Become a mischievous pigeon in this fun and fast-paced game where you drop poop 
 ## Extra Links
 - **Slides**: [Link](https://docs.google.com/presentation/d/1NiI5r_lIVyL9WfSAGekVJedEzXn1Bo2MtLEo17ZsI7M/edit#slide=id.p)
 - **Deploy**: [Link](https://nuriasoley.github.io/el-ataque-de-las-palomas/)
+
+## Special Thanks
+
+- To the Sala 12, where they helped me solve many coding doubts and encouraged me to keep pushing forward.
+- To the teachers, for providing us with the tools and resources to achieve our goals and guiding us along the way.
+- To my family, who have constantly supported me in this radical career change I've decided to pursue.
