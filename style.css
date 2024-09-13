@@ -86,8 +86,8 @@ h1 {
 #instructions .controls{
   display: flex;
   flex-direction: row;
-  height: 150px;
-  width: 150px;
+  height: 100px;
+  width: 100px;
   justify-content: center;
   align-items: center;
   padding-left: 50px;
