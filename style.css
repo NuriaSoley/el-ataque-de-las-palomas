@@ -6,7 +6,7 @@
 body {
   margin: 0;
   font-family: "Dosis", sans-serif;
-  font-size: 25px;
+  font-size: 15px;
 }
 
 #splash-screen {
@@ -132,6 +132,27 @@ h1 {
   align-items: center;
 }
 
+#mute {
+  background-image: url("./Images/mute.png");
+  background-color: transparent;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+  outline: none;
+  text-align: center;
+  height: 20px;
+  width: 20px;
+}
+
+#options{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
 #game-box {
   background-color: grey;
   width: 1000px;
@@ -177,8 +198,8 @@ h1 {
 }
 
 #roasted-chicken{
-  width: 500px;
-  height: 400px;
+  width: 350px;
+  height: 250px;
 }
 
 #restart-btn {

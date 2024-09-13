@@ -11,6 +11,7 @@ const scoreList = document.querySelector("#popularity-list")
 const startBtnNode = document.querySelector("#start-btn")
 const restartBtnNode = document.querySelector("#restart-btn")
 const menuBtnNode = document.querySelector("#menu-btn")
+const muteBtnNode = document.querySelector("#mute")
 
 //game box
 const gameBoxNode = document.querySelector("#game-box")
@@ -53,8 +54,8 @@ gameMusic.play()
 function startGame (){
 
   // cambiar pantallas
-  splasScreenNode.style.display = "none" //ocultar la pantalla principal
-  gameScreenNode.style.display = "flex" // que aparezca la pantalla de juego que estava oculta en el CSS
+  splasScreenNode.style.display = "none"
+  gameScreenNode.style.display = "flex" 
 
   gameAmbientSound.play()
   pigeonSound.play()
@@ -76,7 +77,7 @@ objetivosIntervalId = setInterval (()=>{
   }, frecuenciaObjetivos)
 }
 
-function gameLoop (){//la que se ejecuta 60 veces por segundo en el intervalo principal
+function gameLoop (){
  
   palomaObj.palomaMovement()
 
@@ -265,6 +266,10 @@ function backToMenu (){
   gameMusic.currentTime = 0
 }
 
+function stopMusic(){
+  gameMusic.pause()
+}
+
 function getPlayerName (){ //para guardar el nombre que el jugador escribe en pantalla inicio
   let inputName = inputNameNode.value.trim()
   if (inputName.length === 0){
@@ -308,6 +313,8 @@ startBtnNode.addEventListener("click", startGame)
 restartBtnNode.addEventListener("click", restartGame)
 
 menuBtnNode.addEventListener("click", backToMenu)
+
+muteBtnNode.addEventListener("click", stopMusic)
 
 window.addEventListener("keydown", (event) => {//window porque no tiene nada que ver con la pantalla
   if (event.key === "d"){
