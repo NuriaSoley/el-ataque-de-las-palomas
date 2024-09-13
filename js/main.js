@@ -5,7 +5,8 @@ const gameScreenNode = document.querySelector("#game-screen")
 const gameOverScreenNode = document.querySelector("#game-over-screen")
 const inputNameNode = document.querySelector("#name")//nodo para el input donde el jugador introduce el nombre
 const scoreDisplayNode = document.querySelector("#scoreDisplay")
-const scoreList = document.querySelector("#popularity-list")
+const scoreListStart = document.querySelector("#popularity-list-start")
+const scoreListEnd = document.querySelector("#popularity-list-end")
 
 //botones
 const startBtnNode = document.querySelector("#start-btn")
@@ -47,8 +48,7 @@ gameMusic.loop = false
 gameMusic.volume = 0.04
 
 
-gameMusic.play()
-
+showScoresStart()
 
 //FUNCIONES GLOBALES DEL JUEGO
 function startGame (){
@@ -232,9 +232,7 @@ function gameOver (){
   gameAmbientSound.currentTime = 0
   pigeonSound.currentTime = 0
   gameMusic.currentTime = 0
-  getPlayerName()
-  storeScore(playerName, score)
-  showScores(scoreList)
+  showScoresEnd()
 }
 
 function restartGame (){
@@ -282,7 +280,7 @@ function getPlayerName (){ //para guardar el nombre que el jugador escribe en pa
 
 
 //!funciones para el localStorage
-function storeScore(name, score) {
+function storeScoreStart(name, score) {
   const newScore = { name, score };
 
   let scores = JSON.parse(localStorage.getItem('scores')) || [];
@@ -290,9 +288,9 @@ function storeScore(name, score) {
   localStorage.setItem('scores', JSON.stringify(scores));
 }
 
-function showScores(listElement) {
+function showScoresStart() {
   // Limpiar la lista de puntuaciones anterior
-  listElement.innerHTML = ''; 
+  scoreListStart.innerHTML = ''; 
 
   const scores = JSON.parse(localStorage.getItem('scores')) || [];
 
@@ -303,7 +301,32 @@ function showScores(listElement) {
   bestScores.forEach(score => {
     const li = document.createElement('li');
     li.textContent = `${score.name} - ${score.score} points`;
-    listElement.appendChild(li);
+    scoreListStart.appendChild(li);
+  });
+}
+
+function storeScoreEnd(name, score) {
+  const newScore = { name, score };
+
+  let scores = JSON.parse(localStorage.getItem('scores')) || [];
+  scores.push(newScore);
+  localStorage.setItem('scores', JSON.stringify(scores));
+}
+
+function showScoresEnd() {
+  // Limpiar la lista de puntuaciones anterior
+  scoreListEnd.innerHTML = ''; 
+
+  const scores = JSON.parse(localStorage.getItem('scores')) || [];
+
+  scores.sort((a, b) => b.score - a.score);
+
+  const bestScores = scores.slice(0, 5);
+
+  bestScores.forEach(score => {
+    const li = document.createElement('li');
+    li.textContent = `${score.name} - ${score.score} points`;
+    scoreListEnd.appendChild(li);
   });
 }
 

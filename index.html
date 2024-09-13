@@ -42,7 +42,7 @@
         <div class="playerName">
           <label for="name">Write your name!</label>
           <input type="text" id="name" placeholder="Pigeon">
-          <ul id="popularity-list"></ul>
+          <ul id="popularity-list-start"></ul>
         </div>
       </div>
       
@@ -84,9 +84,9 @@
       <h1>GAME<br>OVER</h1>
       <img id="roasted-chicken" src="./Images/roasted.png" alt="roasted-chicken">
     </div>
-    <div>
-      <p>Your final score is:</p>
-      <p id="totalScore"></p>
+    <div id="classification" class="container">
+      <h4>POPULARITY CONTEST</h4>
+        <ul id="popularity-list-end"></ul>
     </div>
     <div id="buttons">
       <button id="restart-btn">Again!</button>
